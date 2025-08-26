@@ -23,13 +23,36 @@ I **HIGHLY** recommend using this document to guide you if you're a first time u
 srun --time=2:00:00 --mem=20G --partition=interactive --pty /usr/bin/bash
 
 cd /home/exacloud/gscratch/CEDAR/[user]
-git clone x
+git clone https://github.com/ohsu-cedar-comp-hub/AMLClock.git
 cd AMLClock
 ```
 
 Run ```tree``` to ensure you have all the neccessary files. 
 Your output should look like this: 
+```
+.
+├── EXAMPLE_INPUT
+│   ├── SampleSheets
+│   │   └── S1_SampleSheet.csv
+│   ├── data_S1_R1.fastq.gz
+│   └── data_S1_R2.fastq.gz
+├── README.md
+├── Snakefile
+├── aml_clock.yaml
+├── assets
+│   ├── cluster_breakdown.png
+│   └── config_breakdown.png
+├── config
+│   ├── cluster
+│   │   └── config.v8+.yaml
+│   └── config.json
+└── scripts
+    ├── add_id.sh
+    ├── align.sh
+    ├── fg_demux.sh
+    └── trim.sh
 
+```
 
 2. Set up the conda environment. 
 ```
@@ -45,37 +68,37 @@ conda activate aml_clock
 
     You must also have sample sheets to indicate which sample barcodes are expected per sample ID after demultiplexing. Sample sheets should follow the naming scheme of S#_SampleSheet.csv and placed in a SampleSheets directory inside your input data folder. 
 
-An example would be: 
-```
-tree
+    An example is in the EXAMPLE_INPUT directory. 
 
-
-```
-
+<br>
 
 2. Navigate to config/config.json. You will need to change the variables to match your absolute path. 
 
-You will also likely need to change the other variables as it is dependent on the parameters you would like to use for the demultiplexing, trimming and aligning. Refer to Config File Breakdown for more details. 
+    You will also likely need to change the other variables as it is dependent on the parameters you would like to use for the demultiplexing, trimming and aligning. Refer to [Config File Breakdown](#config-file-breakdown) for more details. 
 
-Make sure that **manual is set to false** here. It only needs to be true if you're starting the workflow from the middle. 
+    Make sure that **manual is set to false** here. It only needs to be true if you're starting the workflow from the middle. 
 
+<br>
 
-3. Navigate to config/cluster/config.v8+.yaml. You can change the variables as needed. Refer to Cluster Config File Breakdown for more details. 
+3. Navigate to config/cluster/config.v8+.yaml. You can change the variables as needed. Refer to Cluster Config File Breakdown [Cluster Config File Breakdown](#cluster-config-file-breakdown) for more details. 
 
+<br>
 
 4. Perform a Snakemake dry run to confirm that your data will be ran correctly. 
-```
-configfile=[absolute path to config.json]
-snakemake -n –profile config/cluster/ --configfile=$configfile 
-```
+    ```
+    configfile=[absolute path to config.json]
+    snakemake -n –profile config/cluster/ --configfile=$configfile 
+    ```
 
-Pay close attention to the output of this dry run and check that the files Snakemake is expected to generate are correct. 
+    Pay close attention to the output of this dry run and check that the files Snakemake is expected to generate are correct. 
+
+<br>
 
 6. Now run this workflow using the launch script `scripts/run_pipeline.sh` 
-```
-sbatch scripts/run_pipeline.sh -c $configfile 
+    ```
+    sbatch scripts/run_pipeline.sh -c $configfile 
 
-```
+    ```
 
 
 NOTE: If you want to run the workflow from the start, but end earlier, you would be looking to customize like this: 
@@ -96,31 +119,39 @@ A perfect case example is: I have output files that have been trimmed. I want to
     
     For whatever your input will be, it must match the format of the rule that you are trying to start from. 
 
-    If you want to start from **trim**: 
-    Input files must be in [input dir]/Demuxed: 
-        *_R1.fastq.gz 
-        *_R2.fastq.gz
+    Start from **trim**: 
 
-    If you want to start from **align**: 
-    Input files must be in [input dir]/Trimmed: 
-        *_R1_val_1.fq.gz 
-        *_R2_val_2.fq.gz 
+    Input files must be in [input dir]/Demuxed. 
+
+    Input files must end in: *_R1.fastq.gz , *_R2.fastq.gz
+
+    Start from **align**: 
+
+    Input files must be in [input dir]/Trimmed. 
+
+    Input files must end in: *_R1_val_1.fq.gz  , *_R2_val_2.fq.gz 
+
+<br>
 
 2. Adjust your config file in config/config.json as needed. You **MUST** set manual to true here. 
 
+<br>
+
 3. Run dry run now. 
 
-```
-configfile=[absolute path to config.json]
-snakemake -n –-profile config/cluster/ --configfile=$configfile 
-```
+    ```
+    configfile=[absolute path to config.json]
+    snakemake -n –-profile config/cluster/ --configfile=$configfile 
+    ```
+
+<br>
 
 4. Run the workflow now. 
 
-```
-sbatch scripts/run_pipeline.sh -c $configfile 
+    ```
+    sbatch scripts/run_pipeline.sh -c $configfile 
 
-```
+    ```
 
 ## Config File Breakdown 
 
