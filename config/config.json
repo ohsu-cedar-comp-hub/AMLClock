@@ -1,0 +1,19 @@
+{ 
+    "raw_data": "/home/groups/CEDAR/chaoe/projects/aml_clock/test",
+    "demux_read_structure": "6B144T,150T", 
+    "demux":"/home/groups/CEDAR/chaoe/projects/aml_clock/scripts/fg_demux.sh", 
+    "add_id":"/home/groups/CEDAR/chaoe/projects/aml_clock/scripts/add_id.sh", 
+    "index_dict": "/home/groups/CEDAR/chaoe/projects/aml_clock/Sample-Index_dictionary.txt", 
+    "trim": "/home/groups/CEDAR/chaoe/projects/aml_clock/scripts/trim.sh", 
+    "clip_r1": 20, 
+    "clip_r2": 20, 
+    "clip_3prime": 30, 
+    "align": "/home/groups/CEDAR/chaoe/projects/aml_clock/scripts/align.sh",
+    "genome":"/home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/", 
+    "bwt2cores": 4, 
+    "deduplicate": "/home/groups/CEDAR/chaoe/projects/aml_clock/scripts/deduplicate.sh", 
+    "manual": false 
+
+
+
+}
