@@ -57,6 +57,8 @@ tree
 
 You will also likely need to change the other variables as it is dependent on the parameters you would like to use for the demultiplexing, trimming and aligning. Refer to Config File Breakdown for more details. 
 
+Make sure that **manual is set to false** here. It only needs to be true if you're starting the workflow from the middle. 
+
 
 3. Navigate to config/cluster/config.v8+.yaml. You can change the variables as needed. Refer to Cluster Config File Breakdown for more details. 
 
