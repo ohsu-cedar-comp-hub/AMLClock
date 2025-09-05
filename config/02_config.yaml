@@ -1,0 +1,17 @@
+# dir to start in -> can be the aligned_paired dir from last workflow
+main_dir: /home/groups/CEDAR/chaoe/projects/aml_clock/last_test/Aligned_paired
+# 1. Merging 
+merge_script: scripts/merge.sh
+merge: false # only occurs if specified true 
+# 2. Deduplicate
+deduplicate: scripts/deduplicate.sh
+# 3. Extract Methylation Information 
+extract_methyl_info: scripts/extract_methyl.sh
+genome: /home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/
+cores: 2
+ignore_r1: 4 # bp to ignore from read 1
+ignore_r2: 2 # bp to ignore from read 2
+# Option: Manual 
+manual: false # switch to true if not running from very start 
+
+# more details? go to 02_config_breakdown in assets 

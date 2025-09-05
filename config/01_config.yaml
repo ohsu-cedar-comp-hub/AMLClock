@@ -1,0 +1,19 @@
+# dir for input raw data 
+raw_data: /home/groups/CEDAR/chaoe/projects/aml_clock/testing
+# 1. Demultiplexing 
+demux_read_structure: 6B144T,150T 
+demux: scripts/demux_w_id.sh
+# 2. Trimming 
+trim: scripts/trim.sh
+clip_r1: 20 # bp to trim from 5' end of R1
+clip_r2: 20 # bp to trim from 5' end of R2
+clip_3prime: 30 # bp to trim from 3' end of R2 
+# 3. Aligning 
+align: scripts/align.sh
+pbat: true # aligning with pbat data? 
+genome: /home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/
+bwt2cores: 4 # cores used for bowtie2 
+# Option: Manual 
+manual: false # switch to true if not running from very start 
+
+# more details? go to 01_config_breakdown in assets 

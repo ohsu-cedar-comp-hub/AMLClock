@@ -53,27 +53,7 @@ cd AMLClock
 Run ```tree``` to ensure you have all the neccessary files. 
 Your output should look like this: 
 ```
-.
-├── EXAMPLE_INPUT
-│   ├── SampleSheets
-│   │   └── S1_SampleSheet.csv
-│   ├── data_S1_R1.fastq.gz
-│   └── data_S1_R2.fastq.gz
-├── README.md
-├── Snakefile
-├── aml_clock.yaml
-├── assets
-│   ├── cluster_breakdown.png
-│   └── config_breakdown.png
-├── config
-│   ├── cluster
-│   │   └── config.v8+.yaml
-│   └── config.json
-└── scripts
-    ├── add_id.sh
-    ├── align.sh
-    ├── fg_demux.sh
-    └── trim.sh
+
 
 ```
 
@@ -115,7 +95,7 @@ cd AMLClock
 
 <br>
 
-2. Navigate to config/01_config.json. You will need to change the variables to match what you need. 
+2. Navigate to config/01_config.yaml. You will need to change the variables to match what you need. 
     
     These are the variables you **must** change and their required values: 
     1. **raw_data: [absolute path to input data directory]**
@@ -141,7 +121,7 @@ cd AMLClock
 4. Perform a Snakemake dry run to confirm that your data will be ran correctly. 
     ```
     cd AMLClock
-    configfile=[absolute path to 01_config.json]
+    configfile=[absolute path to 01_config.yaml]
     snakefile=[absolute path to 01_preprocessing.smk]
 
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
@@ -213,7 +193,7 @@ I will address both below:
 
 <br>
 
-2. Adjust your config file in config/01_config.json as needed. 
+2. Adjust your config file in config/01_config.yaml as needed. 
 
     These are the variables you **must** change and their required values: 
     1. **raw_data: [absolute path to input dir]**
@@ -236,7 +216,7 @@ I will address both below:
     ```
     cd AMLClock
     snakefile=[absolute path to 01_preprocessing.smk]
-    configfile=[absolute path to 01_config.json]
+    configfile=[absolute path to 01_config.yaml]
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
     ```
 
@@ -249,7 +229,7 @@ I will address both below:
     ```
     cd AMLClock
     snakefile=[absolute path to 01_preprocessing.smk]
-    configfile=[absolute path to 01_config.json]
+    configfile=[absolute path to 01_config.yaml]
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
 
     ```
@@ -272,7 +252,7 @@ This workflow is very similar to the Preprocessing Workflow.
     
 <br>
 
-2. Navigate to config/02_config.json. You will need to change the variables to match what you need. 
+2. Navigate to config/02_config.yaml. You will need to change the variables to match what you need. 
     
     These are the variables you **must** change and their required values: 
     1. **main_dir: [absolute path to input data directory]**
@@ -301,7 +281,7 @@ This workflow is very similar to the Preprocessing Workflow.
 4. Perform a Snakemake dry run to confirm that your data will be ran correctly. 
     ```
     cd AMLClock
-    configfile=[absolute path to 02_config.json]
+    configfile=[absolute path to 02_config.yaml]
     snakefile=[absolute path to 02_methylation_calling.smk]
 
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
@@ -357,7 +337,7 @@ The only way this would occur for this workflow is for when you have deduplicate
 
 <br>
 
-2. Adjust your config file in config/02_config.json as needed. 
+2. Adjust your config file in config/02_config.yaml as needed. 
 
     These are the variables you **must** change and their required values: 
     1. **main_dir: [absolute path to input dir]**
@@ -382,7 +362,7 @@ The only way this would occur for this workflow is for when you have deduplicate
     ```
     cd AMLClock
     snakefile=[absolute path to 02_preprocessing.smk]
-    configfile=[absolute path to 02_config.json]
+    configfile=[absolute path to 02_config.yaml]
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
     ```
 
@@ -395,7 +375,7 @@ The only way this would occur for this workflow is for when you have deduplicate
     ```
     cd AMLClock
     snakefile=[absolute path to 02_preprocessing.smk]
-    configfile=[absolute path to 02_config.json]
+    configfile=[absolute path to 02_config.yaml]
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
 
     ```

@@ -5,28 +5,28 @@ import pandas as pd
 
 main_dir = config['raw_data']
 
+# configfile: "01_config.yaml"
 
 if not config.get("manual", False): 
 # raw data files should have both R1 and R2 
     FILES = glob_wildcards(os.path.join(main_dir, "{sample_info}_R1.fastq.gz"))
     NAMES = [sample for sample in FILES.sample_info if os.path.exists(os.path.join(main_dir, f"{sample}_R2.fastq.gz"))]
-
-    S_IDS = [re.search(r"_S(\d+)_", s).group(1) for s in NAMES]
-
-    print(NAMES) # sample names 
+    print("Sample names are:", NAMES) # sample names 
 
     W_IDS = {}
 
     for sample_name in NAMES:
         s_id = re.search(r"_S(\d+)_", sample_name).group(1) 
         barcode_info = pd.read_csv(os.path.join(main_dir, 'SampleSheets', f'S{s_id}_SampleSheet.csv'))
-        barcodes = barcode_info['Sample_ID'].astype(str) + '-' + barcode_info['Sample_Name'].astype(str) + '-' + barcode_info['Sample_Barcode'] + '_' + barcode_info['Sample_Index'].astype(str)
+        barcode_info = barcode_info.dropna(subset=['Sample_Index'])
+        # getting rid of blanks from expected list bc we don't want snakemake to process them 
+        barcodes = barcode_info['Sample_ID'].astype(str) + '-' + barcode_info['Sample_Name'].astype(str) + '-' + barcode_info['Sample_Barcode'] + '_' + barcode_info['Sample_Index'].apply(lambda x: str(int(x)) if pd.notna(x) else 'NA')
         for full_w_id in barcodes: 
             W_IDS[full_w_id] = sample_name 
             
 
+    print("Expected Demultiplexed Samples After Removing Blanks:", list(W_IDS.keys()))
 
-    print(W_IDS)
 
 else: 
     print("Manual set to True. Sample Names will be detected based on the presence of output files in config['raw data']. ") 
