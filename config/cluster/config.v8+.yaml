@@ -7,13 +7,14 @@ cluster-generic-submit-cmd:
     --mem={resources.mem_mb}
     --gres={resources.gres}
     --job-name=smk-{rule}-{wildcards}
-    --output=test_logs/20250822/{rule}/{rule}-{wildcards}-%j.out
+    --output=test_logs/{rule}/{rule}-{wildcards}-%j.out
     --parsable
     --time={resources.time}
+cluster-generic-status-cmd: python ./scripts/cluster-status.py
 default-resources:
   - time="01:00:00"
   - mem_mb=5000
-  - gres="disk:1024"
+  - gres="gpu:0"
 jobs: 40
 rerun-incomplete: True
 use-conda: True

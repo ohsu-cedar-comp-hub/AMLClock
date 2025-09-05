@@ -1,0 +1,12 @@
+{ 
+    "main_dir": "/home/groups/CEDAR/chaoe/projects/aml_clock/last_test/Aligned_paired",
+    "merge_script":"scripts/merge.sh",
+    "merge": false, 
+    "deduplicate": "scripts/deduplicate.sh", 
+    "extract_methyl_info": "scripts/extract_methyl.sh", 
+    "genome": "/home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/", 
+    "cores": 2, 
+    "ignore_r1": 4, 
+    "ignore_r2": 2, 
+    "manual": false
+}

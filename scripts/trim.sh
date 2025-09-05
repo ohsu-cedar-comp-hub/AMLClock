@@ -6,12 +6,9 @@
 #SBATCH --cpus-per-task=1
 #SBATCH --mem-per-cpu=8gb
 #SBATCH --time=8:00:00
-#SBATCH --gres=disk:1024 
 #SBATCH --job-name=trimming_test
 
 
-srun mkdir-scratch.sh
-SCRATCH_PATH="/mnt/scratch/${SLURM_JOB_ID}"
 
 
 inputs=""
@@ -65,13 +62,8 @@ echo "R1 Clip:" $clip_r1
 echo "R2 Clip:" $clip_r2 
 echo "R2 3' Clip:" $clip_3prime
 echo "Output Directory:" $outdir
-echo "Running trimming in:" $SCRATCH_PATH
 
 
-cp $input1 $SCRATCH_PATH/
-cp $input2 $SCRATCH_PATH/
-
-cd $SCRATCH_PATH/ 
 
 trim_galore --gzip \
   --clip_R1 "$clip_r1" \
@@ -79,14 +71,7 @@ trim_galore --gzip \
   --three_prime_clip_R2 "$clip_3prime" \
   --paired \
   --fastqc \
-  --output_dir "$SCRATCH_PATH" \
-  "$SCRATCH_PATH/$(basename $input1)" \
-  "$SCRATCH_PATH/$(basename $input2)"
+  --output_dir $outdir \
+  $input1 \
+  $input2
 
-
-mv $SCRATCH_PATH/*.fastq.gz_trimming_report.txt $outdir
-mv $SCRATCH_PATH/*.fq.gz $outdir
-mv $SCRATCH_PATH/*_fastqc.html $outdir 
-mv $SCRATCH_PATH/*_fastqc.zip $outdir 
-
-srun rmdir-scratch.sh 
