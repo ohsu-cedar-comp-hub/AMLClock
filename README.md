@@ -81,7 +81,7 @@ Your output should look like this:
 ```
 conda env create -f aml_clock.yaml
 conda activate aml_clock
-cd aml_clock
+cd AMLClock
 ```
 
 </details>
@@ -140,7 +140,7 @@ cd aml_clock
 
 4. Perform a Snakemake dry run to confirm that your data will be ran correctly. 
     ```
-    cd aml_clock
+    cd AMLClock
     configfile=[absolute path to 01_config.json]
     snakefile=[absolute path to 01_preprocessing.smk]
 
@@ -153,7 +153,7 @@ cd aml_clock
 
 6. Now run this workflow using the launch script `scripts/run_pipeline.sh` 
     ```
-    cd aml_clock
+    cd AMLClock
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
 
     ```
@@ -162,7 +162,7 @@ cd aml_clock
 **NOTE:** If you want to run the workflow from the start, but end earlier, you would be looking to customize like this: 
 
 ```
-cd aml_clock
+cd AMLClock
 
 snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
 
@@ -234,7 +234,7 @@ I will address both below:
 4. Run dry run now. 
 
     ```
-    cd aml_clock
+    cd AMLClock
     snakefile=[absolute path to 01_preprocessing.smk]
     configfile=[absolute path to 01_config.json]
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
@@ -247,7 +247,7 @@ I will address both below:
 4. Run the workflow now. 
 
     ```
-    cd aml_clock
+    cd AMLClock
     snakefile=[absolute path to 01_preprocessing.smk]
     configfile=[absolute path to 01_config.json]
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
@@ -300,7 +300,7 @@ This workflow is very similar to the Preprocessing Workflow.
 
 4. Perform a Snakemake dry run to confirm that your data will be ran correctly. 
     ```
-    cd aml_clock
+    cd AMLClock
     configfile=[absolute path to 02_config.json]
     snakefile=[absolute path to 02_methylation_calling.smk]
 
@@ -313,7 +313,7 @@ This workflow is very similar to the Preprocessing Workflow.
 
 6. Now run this workflow using the launch script `scripts/run_pipeline.sh` 
     ```
-    cd aml_clock
+    cd AMLClock
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
 
     ```
@@ -321,7 +321,7 @@ This workflow is very similar to the Preprocessing Workflow.
 NOTE: If you want to run the workflow from the start, but end earlier, you would be looking to customize like this: 
 
 ```
-cd aml_clock
+cd AMLClock
 
 snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
 
@@ -380,7 +380,7 @@ The only way this would occur for this workflow is for when you have deduplicate
 4. Run dry run now. 
 
     ```
-    cd aml_clock
+    cd AMLClock
     snakefile=[absolute path to 02_preprocessing.smk]
     configfile=[absolute path to 02_config.json]
     snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
@@ -393,7 +393,7 @@ The only way this would occur for this workflow is for when you have deduplicate
 4. Run the workflow now. 
 
     ```
-    cd aml_clock
+    cd AMLClock
     snakefile=[absolute path to 02_preprocessing.smk]
     configfile=[absolute path to 02_config.json]
     sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile
