@@ -53,7 +53,35 @@ cd AMLClock
 Run ```tree``` to ensure you have all the neccessary files. 
 Your output should look like this: 
 ```
-
+.
+├── 01_preprocessing.smk
+├── 02_methylation_calling.smk
+├── EXAMPLE_INPUT
+│   ├── SampleSheets
+│   │   └── S1_SampleSheet.csv
+│   ├── data_S1_R1.fastq.gz
+│   └── data_S1_R2.fastq.gz
+├── README.md
+├── aml_clock.yaml
+├── assets
+│   ├── 01_config_breakdown.png
+│   ├── 02_config_breakdown.png
+│   └── cluster_breakdown.png
+├── config
+│   ├── 01_config.yaml
+│   ├── 02_config.yaml
+│   └── cluster
+│       └── config.v8+.yaml
+└── scripts
+    ├── align.sh
+    ├── change_ext.sh
+    ├── cluster-status.py
+    ├── deduplicate.sh
+    ├── demux_w_id.sh
+    ├── extract_methyl.sh
+    ├── merge.sh
+    ├── run_pipeline.sh
+    └── trim.sh
 
 ```
 
@@ -411,20 +439,26 @@ I've chosen the default and some rule-specific manual adjustments through some e
 For the full explanation go [here.](https://ohsuitg-my.sharepoint.com/:w:/r/personal/chaoe_ohsu_edu/Documents/Snakemake%20AML_CLOCK%20Workflow.docx?d=w9bad47d42fa34591afd6967842272001&csf=1&web=1&e=B5pnh6)
 
 I've also manually adjusted the resource requests for some big rules in the smk files. To take a look, go to the smk file. 
+
 For preprocessing workflow, it will be 01_preprocessing.smk. 
-For methylation calling workfliw, it will be 02_methylation_calling.smk. 
+
+For methylation calling workflow, it will be 02_methylation_calling.smk. 
 
 
-If you want to do any resource adjusting, I suggest you adjust it manually first, before trying to change the defaults. 
+**NOTE: If you want to do any resource adjusting, I suggest you adjust it manually first, before trying to change the defaults.** 
 
 To do so: 
 1. Navigate to the relevant smk file. 
 2. Look for rule [target_rule] in the code. You can see if there are any parameters for resources by looking for: 
-- threads: (specifies # of CPUs) 
-- resources: (specifies time, mem_mb, gres etc. )
+- **threads:** (specifies # of CPUs) 
+- **resources:** (specifies time, mem_mb, gres etc. )
 3. Feel free to adjust your resource requests by modifying the number in threads and the values in resources. 
+    
     If there are no 'threads:' or 'resources:' present under your target rule, you can add them. 
+
+
     **Example:**
+    ```
     rule target: 
         input: ..
         output: ..
@@ -434,7 +468,9 @@ To do so:
             time="04:00:00",
             gres="disk:1024", 
             mem_mb=4000  
+    ```
 
+Want to know if your resource requests were appropriate? 
 
-Want to know if your resource requests were good? Refer to the SlurmJobAssessment tool [here](https://github.com/ohsu-cedar-comp-hub/SlurmStats)
+Refer to the SlurmJobAssessment tool [here](https://github.com/ohsu-cedar-comp-hub/SlurmStats)
 
