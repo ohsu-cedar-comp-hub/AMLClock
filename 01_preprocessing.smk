@@ -2,6 +2,7 @@ import os
 import logging 
 import re 
 import pandas as pd 
+import glob
 
 main_dir = config['raw_data']
 
@@ -9,9 +10,18 @@ main_dir = config['raw_data']
 
 if not config.get("manual", False): 
 # raw data files should have both R1 and R2 
-    FILES = glob_wildcards(os.path.join(main_dir, "{sample_info}_R1.fastq.gz"))
-    NAMES = [sample for sample in FILES.sample_info if os.path.exists(os.path.join(main_dir, f"{sample}_R2.fastq.gz"))]
-    print("Sample names are:", NAMES) # sample names 
+    R1_NAMES = glob.glob(os.path.join(main_dir, "*_R1.fastq.gz"))
+
+    # Extract sample names (without _R1.fastq.gz)
+    SAMPLE_NAMES = [os.path.basename(f).replace("_R1.fastq.gz", "") for f in R1_NAMES]
+
+# Keep only samples that have both _R1 and _R2 files
+    NAMES = [
+        name for name in SAMPLE_NAMES
+        if os.path.exists(os.path.join(main_dir, f"{name}_R2.fastq.gz"))
+    ]
+
+    print("Sample names are:", NAMES)
 
     W_IDS = {}
 
