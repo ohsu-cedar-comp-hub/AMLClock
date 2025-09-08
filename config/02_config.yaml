@@ -7,7 +7,7 @@ merge: false # only occurs if specified true
 deduplicate: scripts/deduplicate.sh
 # 3. Extract Methylation Information 
 extract_methyl_info: scripts/extract_methyl.sh
-genome: /home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/
+genome: /home/exacloud/gscratch/CEDAR/anno/strogant_GRCh38/
 cores: 2
 ignore_r1: 4 # bp to ignore from read 1
 ignore_r2: 2 # bp to ignore from read 2

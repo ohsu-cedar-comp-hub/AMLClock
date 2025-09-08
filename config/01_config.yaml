@@ -11,7 +11,7 @@ clip_3prime: 30 # bp to trim from 3' end of R2
 # 3. Aligning 
 align: scripts/align.sh
 pbat: true # aligning with pbat data? 
-genome: /home/groups/CEDAR/Strogant/Genomes/Human/GRCh38/
+genome: /home/exacloud/gscratch/CEDAR/anno/strogant_GRCh38/
 bwt2cores: 4 # cores used for bowtie2 
 # Option: Manual 
 manual: false # switch to true if not running from very start 
