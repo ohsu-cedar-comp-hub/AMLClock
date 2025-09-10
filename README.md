@@ -92,6 +92,12 @@ conda activate aml_clock
 cd AMLClock
 ```
 
+**NOTE:** If your conda is an older version compared to mine (conda 24.11.3), you may run into an issue. Try the below: 
+```
+conda config --set channel_priority flexible
+```
+If it is still erroring, please email me (chaoe@ohsu.edu)
+
 </details>
 
 ## **Running Preprocessing Workflow**
