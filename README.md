@@ -158,7 +158,7 @@ If it is still erroring, please email me (chaoe@ohsu.edu)
     configfile=[absolute path to 01_config.yaml]
     snakefile=[absolute path to 01_preprocessing.smk]
 
-    snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
+    snakemake -n --profile config/cluster/ --configfile=$configfile -s $snakefile 
     ```
 
     Pay close attention to the output of this dry run and check that the files Snakemake is expected to generate are correct. 
@@ -178,7 +178,7 @@ If it is still erroring, please email me (chaoe@ohsu.edu)
 ```
 cd AMLClock
 
-snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
+snakemake -n --profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
 
 sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile -u [last rule to run]
 
@@ -318,7 +318,7 @@ This workflow is very similar to the Preprocessing Workflow.
     configfile=[absolute path to 02_config.yaml]
     snakefile=[absolute path to 02_methylation_calling.smk]
 
-    snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
+    snakemake -n --profile config/cluster/ --configfile=$configfile -s $snakefile 
     ```
 
     Pay close attention to the output of this dry run and check that the files Snakemake is expected to generate are correct. 
@@ -337,7 +337,7 @@ NOTE: If you want to run the workflow from the start, but end earlier, you would
 ```
 cd AMLClock
 
-snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
+snakemake -n --profile config/cluster/ --configfile=$configfile -s $snakefile --until [last rule to run]
 
 sbatch scripts/run_pipeline.sh -c $configfile -s $snakefile -u [last rule to run]
 
@@ -397,7 +397,7 @@ The only way this would occur for this workflow is for when you have deduplicate
     cd AMLClock
     snakefile=[absolute path to 02_preprocessing.smk]
     configfile=[absolute path to 02_config.yaml]
-    snakemake -n –-profile config/cluster/ --configfile=$configfile -s $snakefile 
+    snakemake -n --profile config/cluster/ --configfile=$configfile -s $snakefile 
     ```
 
     Pay close attention to the output snakemake generates. You should see that the rules snakemake would run are the remaining rules you need. In this case, it should only run all and get_methyl_info rules. 
