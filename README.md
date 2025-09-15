@@ -114,12 +114,17 @@ If it is still erroring, please email me (chaoe@ohsu.edu)
     You must also have sample sheets to indicate which sample barcodes are expected per sample ID after demultiplexing. Sample sheets should follow the naming scheme of S#_SampleSheet.csv and placed in a SampleSheets directory inside your input data folder. 
     The content of the sample sheet must follow fgbio's guidelines: https://fulcrumgenomics.github.io/fgbio/tools/latest/DemuxFastqs.html. 
     
-    NOTE: There is one key addition to the sample sheet: SAMPLE_INDEX. This was added to help with identifying files and each index is unique per sample name. 
+    **NOTE:** There is one key addition to the sample sheet: SAMPLE_INDEX. This was added to help with identifying files and each index is unique per sample name. 
 
     **A full example is in the EXAMPLE_INPUT directory.**
     <br>
     <br>
 
+    **NOTE:** If you want to analyze your blank samples after demultiplexing, make sure you have a unique sample index for them as well. If your blank has no sample index provided, snakemake will skip over it for the next steps. 
+
+    <br>
+    <br>
+    
     **NOTE:** If you have files ending in *\_R1_\{something}.fastq.gz, you can use change_ext.sh located in the scripts/ to change it to the desired format. *_R1.fastq.gz. This script gets rid of the {something} so if you still wanted to keep it, put it manually in file name/use a different script. 
 
     ```
